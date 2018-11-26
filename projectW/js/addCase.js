@@ -1,6 +1,5 @@
 'use strict'
 function addCase() {
-  alert('add case');
     var sur = $$('addCase').getValues().surCase;
     var name = $$('addCase').getValues().nameCase;
     var id = $$('addCase').getValues().idCase;

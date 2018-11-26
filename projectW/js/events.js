@@ -3,6 +3,7 @@ function events() {
 eventSearchResult();
 eventSearchResultApo();
 eventSearchResultApoDoc();
+showSearchResultApo();
 todayAppoitments();
 putValueInForm();
 showCase();

@@ -1,11 +1,6 @@
 'use strict'
 
-var patients =[
-  { id:1, surname:"Петров", name: "Иван", city: "Саратов"},
-{ id:2, surname:"Петров", name: "Михаил", city: "Саратов"},
-{ id:3, surname:"Смирнов", name: "Алексей", midName: "Алексеевич", city: "Саратов",
-street: "Московская", home: "129", flat: "2", phone: "9175483254", age: "40"}
-];
+var patients =[];
 
 var doctors = [
   {id: 1, docSur: "Алексеев", docName: "Иван", sd: "Терапевт"},
@@ -13,10 +8,7 @@ var doctors = [
   {id: 3, docSur: "Ульянов", docName: "Илья", sd: "ЛОР"}
 ];
 
-var appoitments = [
-  {id: 1, patientSur: "Петров", patientName: "Иван", toDocid: 1, pId: 1},
-  {id: 2, patientSur: "Петров", patientName: "Михаил", toDocid: 1, pId: 2}
-];
+var appoitments = [];
 
 var todayAppoitments = [];
 
@@ -94,22 +86,24 @@ function createStartPage() {
           { view:"text", name: "sur", placeholder: "Введите фамилию доктора", label:"Фамилия",
           width:400 },
           {cols:[
-              { view:"button", value:"Поиск", type:"form", width: 100, click: "showSearchResultApo" }
+              { view:"button", value:"Поиск", type:"form", width: 100, click: "showSearchResultApoDoc" }
           ]}
         ]},
-        { view:"form",
-        id: "addApo",
-        elements:[
-          { view:"text", name: "surP", label:"Фамилия пациента", width:400 },
-          { view:"text", name: "nameP", label:"Имя пациента", width:400 },
-          { view:"text", name: "idP", label:"Id пациента", width:400 },
-          { view:"text", name: "surD", label:"Фамилия доктора", width:400 },
-          { view:"text", name: "nameD", label:"Имя доктора", width:400 },
-          { view:"text", name: "idD", label:"Id доктора", width:400 },
-          {cols:[
-              { view:"button", value:"Записать", type:"form", width: 100, click: "showSearchResultApo" }
-          ]}
-        ]}
+        {
+  view:"form", id: "addApo", scroll:false, width:320, elements:[
+    { view:"text", label:"Фамилия пациента", name:"surP"},
+    { view:"text", label:"Имя Пациента", name:"nameP"},
+    { view:"text", label:"id Пациента", name:"idP"},
+    { view:"text", label:"Фамилия Доктора", name:"surD"},
+    { view:"text", label:"Имя Доктора", name:"nameD"},
+    { view:"text", label:"id Доктора", name:"idD"},
+    { view:"datepicker", label:"Дата приёма", name:"dateA" },
+    { view:"button", type:"form", value:"Записать", click:function(){
+      webix.message("<pre>Запись на приём успешно добавлена!</pre>");
+      addNewAppoitment();
+    }}
+  ]
+}
     ]
   },
   {
@@ -131,7 +125,7 @@ function createStartPage() {
        autoheight:true,
        template:"#id# #docSur#   #docName#  |  #sd#",
        select:true,
-       data:doctors
+       data:fd
         }
     ]
   },
@@ -209,7 +203,7 @@ data:doctors
 width:200,
 height:200,
 autoheight:true,
-template:"#patientSur#   #patientName# | id пациента #patientId#",
+template: "#patientSur#   #patientName# | id пациента #patientId#",
 select:true,
 data:todayAppoitments
 }, {

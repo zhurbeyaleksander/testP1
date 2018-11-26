@@ -10,7 +10,7 @@ function addNewPatient() {
     var phone = $$('addNewPatientForm').getValues().phoneAdd;
     var age = $$('addNewPatientForm').getValues().ageAdd;
 
-    patients.push({id: (patients.length - 1), surname: sur, name: name,
+    patients.push({id: (patients.length + 1), surname: sur, name: name,
        midName: midName, city: city,
       street: street, home: home, flat: flat, phone: phone, age: age});
     closeAllPages();

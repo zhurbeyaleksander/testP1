@@ -22,7 +22,7 @@ $$("patientCases").show();
 $$("patientCases").clearAll();
 var item = $$("searchResult").getItem(id);
 cases.forEach(function(it, i){
-       if(it.pId == (item.id + 1)) {
+       if(it.pId == (item.id)) {
       $$("patientCases").add({id: i, surname: it.surname, name: it.name, idCase: it.id, text: it.text});
        }
 
